@@ -1,73 +1,42 @@
 import requests 
-
-def department_api ():
-    department = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/departments")
+"""
+Este módulo contiene funciones para interactuar con la API del Museo Metropolitano de Arte.
+"""
+def obtener_departamentos():
+    """
+    Obtiene la lista de todos los departamentos del museo desde la API, regresa Una lista de diccionarios,
+    donde cada diccionario representa un departamento.
+    """
     try:
-        if department.status_code == 200:
-            return department.json()
-        
+        url = "https://collectionapi.metmuseum.org/public/collection/v1/departments"
+        departamento = requests.get(url)
+       
+        if departamento.status_code == 200:
+            return departamento.json().get("departments", [])
         else:
-            print (f"Se encontro un error al buscar la API de los departamentos. Codigo: {department.status_code}")
-    
-    except:
-        print (f"Error de conexion, intentelo de nuevo mas tarde")
-        return []
-        
-def objects_in_departments ():
-    obj_departments = requests.get ("https://collectionapi.metmuseum.org/public/collection/v1/search")
-    try:
-        if obj_departments.status_code == 200:
-            db = obj_departments.json()
-            return db.get ("objectIDs", [])
-        
-        else: 
-            print (f"Se encontro un error al buscar por departamento. Codigo: {obj_departments.status_code}")
+            print(f"Error al buscar los departamentos en la API. Código: {departamento.status_code}")
             return []
-
     except:
-        print (f"Error de conexion, intentelo de nuevo mas tarde")
+        print("Error, no se encontro nada")
         return []
 
-def objects_details (object_id):
-    obj_details = requests.get (f"https://collectionapi.metmuseum.org/public/collection/v1/objects/{object_id}")
+def buscar_por_departamento(id_departamento):
+    """
+    Busca obras por un ID de departamento especifico en la API (argumento), retorna una lista de IDs de obras
+    que coinciden con el departamento
+    """
     try:
-        if obj_details.status_code == 200:
-            return obj_details.json()
-        
+        url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId={id_departamento}&q=painting"
+        departamento = requests.get(url)
+
+        if departamento.status_code == 200:
+            return departamento.json().get("objectIDs", [])
         else:
-            print (f"Se encontró un error al obtener los detalles del objeto {object_id}. Código: {obj_details.status_code}")
-            return None
-        
-    except:
-        print (f"Error de conexionn, intentelo de nuevo mas tarde")
-        return None
-
-def nationalities_api ():
-    try:
-        nacionalities = []
-        file = open ("Nacionalities.txt", "r")
-        for nacionality in file:
-            nacionalities.append (nacionality.strip())
-
-        file.close ()
-        return nacionalities 
-    
-    except:
-        print("Error: El archivo de nacionalidades no se encontro ")
-        return []
-
-def objects_in_nationalities (nationality):
-    try:
-        nationality = requests.get ("https://collectionapi.metmuseum.org/public/collection/v1/search", params = {"artistNationality": nationality})
-        if nationality.status_code == 200:
-            db = nationality.json()
-            return db.get ("objectIDs", [])
-        
-        else:
-            print (f"Se encontró un error al buscar por nacionalidad. Código: {nationality.status_code}")
+            print(f"Error al buscar obras por departamento. Código: {departamento.status_code}")
             return []
-        
+   
     except:
-        print ("Error de conexion, intentelo de nuevo mas tarde")
+        print("Error, no se encontro nada")
         return []
-      
+
+
