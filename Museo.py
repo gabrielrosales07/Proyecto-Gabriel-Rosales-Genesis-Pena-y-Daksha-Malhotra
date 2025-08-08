@@ -1,4 +1,4 @@
-from api import department_api, objects_in_departments, objects_details
+from api import department_api, objects_in_departments, objects_details, nationalities_api, objects_in_nationalities
 from Department import Department
 from Obra import Obra
 
