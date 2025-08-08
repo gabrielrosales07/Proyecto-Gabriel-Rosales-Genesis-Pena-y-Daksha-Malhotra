@@ -42,4 +42,18 @@ def objects_details (object_id):
         print (f"Error de conexionn, intentelo de nuevo mas tarde")
         return None
 
+def nationalities_api ():
+    try:
+        nacionalities = []
+        file = open ("Nacionalities.txt", "r")
+        for nacionality in file:
+            nacionalities.append (nacionality.strip())
+
+        file.close ()
+        return nacionalities 
+    
+    except:
+        print("Error: El archivo de nacionalidades no se encontro ")
+        return []
+
       
