@@ -32,25 +32,25 @@ class Museo:
             department_found = True
             break
             
-          if department_found:
-            object_ids = objects_in_departments ()
-            if len(object_ids) > 0:
-              print("Obras encontradas con éxito")
-              print(f"Se encontraron {len(object_ids)} obras. ")
+        if department_found:
+          object_ids = objects_in_departments ()
+          if len(object_ids) > 0:
+            print("Obras encontradas con éxito")
+            print(f"Se encontraron {len(object_ids)} obras. ")
               
-              self.obras = []
-              for object_id in object_ids [:10]:
-                dic_obras = objects_details (object_id)
-                if dic_obras:
-                  self.obras.append(Obra( id_obra = dic_obras.get ("objectID"), titulo = dic_obras.get ("title"), autor = dic_obras.get ("artistDisplayName"), nacionalidad = dic_obras.get ("artistNationality"), fecha = dic_obras.get ("objectDate")))
+            self.obras = []
+            for object_id in object_ids [:10]:
+              dic_obras = objects_details (object_id)
+              if dic_obras:
+                self.obras.append(Obra( id_obra = dic_obras.get ("objectID"), titulo = dic_obras.get ("title"), autor = dic_obras.get ("artistDisplayName"), nacionalidad = dic_obras.get ("artistNationality"), fecha = dic_obras.get ("objectDate")))
 
-              for obra in self.obras:
-                obra.show()
-
-            else:
-              print ("No se encontraron obras en este departamento")
+            for obra in self.obras:
+              obra.show()
 
           else:
+              print ("No se encontraron obras en este departamento")
+          
+        else:
             print ("Error: ID ingresado incorrecto")
             
       except:
