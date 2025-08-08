@@ -37,7 +37,7 @@ class Museo:
           object_ids = objects_in_departments ()
           if len(object_ids) > 0:
             print("Obras encontradas con éxito")
-            print(f"Se encontraron {len(object_ids)} obras. ")
+            print(f"Se encontraron {len(object_ids)} obras ")
               
             self.obras = []
             for object_id in object_ids [:10]:
@@ -56,6 +56,27 @@ class Museo:
             
       except:
         print ("Error: El ID del departamento debe ser un número")
+
+    elif choice == "2":
+      nationalities = nationalities_api()
+      print ("Lista de Nacionalidades")
+      print ()
+      
+      for nationality in nationalities:
+        print (nationality)
+        
+      nationality_found = False
+      nationality_choice = input ("Ingrese la nacionalidad del autor: ")
+      for nationality in nationalities:
+        if nationality_choice.strip().lower() == nationality.strip().lower():
+          nationality_found = True
+          break
+            
+      if nationality_found:
+        object_ids = objects_in_nationalities (nationality)
+        if len (object_ids) > 0:
+          print("Obras encontradas con éxito")
+          print(f"Se encontraron {len(object_ids)} obras")
 
   def show_departments (self):
     for department in self.department:
