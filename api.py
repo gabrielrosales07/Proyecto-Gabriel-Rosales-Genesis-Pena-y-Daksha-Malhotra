@@ -1,4 +1,4 @@
-import requests
+import requests 
 
 def department_api ():
     department = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/departments")
