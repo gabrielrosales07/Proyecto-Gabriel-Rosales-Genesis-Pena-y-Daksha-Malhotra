@@ -5,14 +5,14 @@ class Museo:
   
   def start(self):
     self.iniciar_objetos()
-        
-      while True:
-        interfaz = input ("""Bienvenido al Museo MetroArt, escoja una opcion: 
+    
+    while True:
+      interfaz = input ("""Bienvenido al Museo MetroArt, escoja una opcion: 
 1- Buscar Obras
 2- Ver Detalles de Obras
 ---> """)
-        if interfaz == "1":
-          self.show_obras()
+      if interfaz == "1":
+        self.show_obras()
 
   def show_obras (self):
         choice = input ("""Ingrese como desea ver las obras: 
