@@ -78,6 +78,20 @@ class Museo:
           print("Obras encontradas con éxito")
           print(f"Se encontraron {len(object_ids)} obras")
 
+          self.obras = []
+          for object_id in object_ids [:10]:
+            dic_obras = objects_details (object_id)
+            if dic_obras:
+              self.obras.append(Obra( id_obra = dic_obras.get ("objectID"), titulo = dic_obras.get ("title"), autor = dic_obras.get ("artistDisplayName"), nacionalidad = dic_obras.get ("artistNationality"), fecha = dic_obras.get ("objectDate")))
+                            
+          for obra in self.obras:
+            obra.show()
+                
+        else:
+          print ("No se encontraron obras en esta nacionalidad")
+      else:
+        print ("Error: Nacionalidad incorrecta")
+
   def show_departments (self):
     for department in self.department:
       print()
