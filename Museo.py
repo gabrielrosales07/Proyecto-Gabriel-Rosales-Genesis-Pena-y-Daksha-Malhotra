@@ -20,6 +20,24 @@ class Museo:
 2- Por Nacionalidad del Autor
 3- Por Nombre del Autor
 ---> """)
+    
+    if choice == "1":
+            self.show_departments()
+            id_departamento = input ("Ingrese el ID de un departamento: ")
+            
+            try:
+                department_found = False
+                for departamento in self.department:
+                    if departamento.id == int(id_departamento):
+                     department_found = True
+                     break
+                    
+                if department_found:
+                    object_ids = objects_in_departments ()
+                    if len(object_ids) > 0:
+                        print("Obras encontradas con éxito")
+                        print(f"Se encontraron {len(object_ids)} obras. ")
+        
 
   def show_departments (self):
     for department in self.
