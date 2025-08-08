@@ -10,5 +10,7 @@ class Museo:
     print()
     department.show()
 
-  def iniciar_objetos (self):    
+  def iniciar_objetos (self):   
+        dic_departments = department_api() ["departments"]
+        self.department = []
     
