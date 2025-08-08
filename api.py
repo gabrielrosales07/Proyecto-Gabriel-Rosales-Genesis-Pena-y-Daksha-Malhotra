@@ -12,4 +12,19 @@ def department_api ():
     except:
         print (f"Error de conexion, intentelo de nuevo mas tarde")
         return []
+def objects_in_departments ():
+    obj_departments = requests.get ("https://collectionapi.metmuseum.org/public/collection/v1/search")
+    try:
+        if obj_departments.status_code == 200:
+            db = obj_departments.json()
+            return db.get ("objectIDs", [])
+        
+        else: 
+            print (f"Se encontro un error al buscar por departamento. Codigo: {obj_departments.status_code}")
+            return []
+    
+    except:
+        print (f"Error de conexion, intentelo de nuevo mas tarde")
+        return []
+
       
