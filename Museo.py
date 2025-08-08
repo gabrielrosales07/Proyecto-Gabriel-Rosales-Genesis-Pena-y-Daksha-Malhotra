@@ -1,5 +1,6 @@
 from api import department_api, objects_in_departments, objects_details
 from Department import Department
+from Obra import Obra
 
 class Museo:
   
