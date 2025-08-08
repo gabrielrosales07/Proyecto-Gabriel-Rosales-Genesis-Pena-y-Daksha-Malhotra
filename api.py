@@ -23,6 +23,19 @@ def objects_in_departments ():
         else: 
             print (f"Se encontro un error al buscar por departamento. Codigo: {obj_departments.status_code}")
             return []
+
+    def objects_details (object_id):
+    obj_details = requests.get (f"https://collectionapi.metmuseum.org/public/collection/v1/objects/{object_id}")
+    try:
+        if obj_details.status_code == 200:
+            return obj_details.json()
+        
+        else:
+            print (f"Se encontró un error al obtener los detalles del objeto {object_id}. Código: {obj_details.status_code}")
+            return None
+        
+    except:
+        print (f"Error de conexionn, intentelo de nuevo mas tarde")
     
     except:
         print (f"Error de conexion, intentelo de nuevo mas tarde")
