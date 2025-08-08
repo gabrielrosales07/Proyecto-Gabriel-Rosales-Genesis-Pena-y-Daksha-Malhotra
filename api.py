@@ -56,4 +56,18 @@ def nationalities_api ():
         print("Error: El archivo de nacionalidades no se encontro ")
         return []
 
+def objects_in_nationalities (nationality):
+    try:
+        nationality = requests.get ("https://collectionapi.metmuseum.org/public/collection/v1/search", params = {"artistNationality": nationality})
+        if nationality.status_code == 200:
+            db = nationality.json()
+            return db.get ("objectIDs", [])
+        
+        else:
+            print (f"Se encontró un error al buscar por nacionalidad. Código: {nationality.status_code}")
+            return []
+        
+    except:
+        print ("Error de conexion, intentelo de nuevo mas tarde")
+        return []
       
