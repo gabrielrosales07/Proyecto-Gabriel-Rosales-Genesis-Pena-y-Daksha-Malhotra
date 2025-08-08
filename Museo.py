@@ -13,6 +13,7 @@ class Museo:
   def iniciar_objetos (self):   
         dic_departments = department_api() ["departments"]
         self.department = []
+    
     for department in dic_departments:
       self.department.append (Department(department["departmentId"], department["displayName"]))
     
