@@ -12,6 +12,7 @@ def department_api ():
     except:
         print (f"Error de conexion, intentelo de nuevo mas tarde")
         return []
+        
 def objects_in_departments ():
     obj_departments = requests.get ("https://collectionapi.metmuseum.org/public/collection/v1/search")
     try:
