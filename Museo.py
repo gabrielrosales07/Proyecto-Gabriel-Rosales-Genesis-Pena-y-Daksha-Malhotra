@@ -1,4 +1,4 @@
-from api import department_api, objects_in_departments
+from api import department_api, objects_in_departments, objects_details
 from Department import Department
 
 class Museo:
