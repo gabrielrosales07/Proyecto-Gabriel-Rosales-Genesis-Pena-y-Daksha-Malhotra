@@ -195,6 +195,44 @@ class Museo:
                     break
             else:
                 print("\n no hay mas obras")
+    
+    
+    def mostrar_detalles_obra(self):
+        """
+        permite al usuario ver los detalles de una obra en concreto preguntando por su ID
+        y los muestra utilizando la clase Obra.
+        """
+        
+        try:
+            id_obra = int(input("\n Ingrese el ID para ver detalles: "))
+
+            datos_obra = obtener_detalles_obra(id_obra)
+
+            if datos_obra:
+                obra_objeto = Obra(datos_obra)
+                obra_objeto.mostrar() 
+                
+            else:
+                print(f"no se encontraron detalles de la obra {id_obra}")
+        
+        except:
+            print("valor ingresado incorrecto")
+        
+           
+
+    def cargar_datos(self):
+            """
+            carga los datos iniciales como objetos al inicio de la aplicación
+            """
+            self.departamentos = []
+            self.nacionalidades = []
+
+            datos_departamentos = obtener_departamentos()
+            for departamento in datos_departamentos:
+                self.departamentos.append(Department(departamento["departmentId"], departamento["displayName"]))
+            
+            self.nacionalidades = self.leer_nacionalidades_desde_archivo()
+    
 
 
 
