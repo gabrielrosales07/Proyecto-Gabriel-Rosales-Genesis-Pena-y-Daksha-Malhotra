@@ -111,12 +111,10 @@ class Museo:
         except:
             print("opcion invalida, ingrese un numero)
 
-
     def leer_nacionalidades_desde_archivo(self):
         """
         Lee la lista de nacionalidades desde el archivo "Nationalities.txt"
         """
-        
         nacionalidades_cargadas = []
 
         #se tuvo que buscar una manera que no conocemos para leer un archivo txt, importamos os
@@ -129,30 +127,31 @@ class Museo:
                     nacionalidades_cargadas.append(linea.strip())
         except:
             print(f" no se encontro archivo: {file}")
-        
+       
         return nacionalidades_cargadas
-
 
     def buscar_obras_por_artista(self):
         """
         Permite al usuario buscar obras por el nombre del artista
         Utiliza mostrar_obras_paginadas para mostrar los resultados de 10 en 10
         """
-        
+       
         nombre_artista = input("\n Ingrese el nombre del artista: ").strip()
+
 
         if nombre_artista:
             ids_obras = buscar_por_nombre_artista(nombre_artista)
-            
+           
             if ids_obras:
                 self.mostrar_obras_paginadas(ids_obras)
             else:
                 print(f"No se encontraron obras para el artista {nombre_artista}")
-        
+       
         else:
             print("error, no ingresaste nada.")
+       
 
-        def mostrar_obras_paginadas(self, ids_obras):
+    def mostrar_obras_paginadas(self, ids_obras):
         """
         Muestra una lista de obras de 10 en 10.
         Para cada obra muestra: ID, Título, Autor
@@ -162,7 +161,6 @@ class Museo:
        
         if total_obras == 0:
             return
-
 
         indice_actual = 0
         while indice_actual < total_obras:
@@ -182,10 +180,8 @@ class Museo:
                     else:
                         print(f"ID no dispomible")
 
-
                 except:
                     print(f"Error al procesar ")
-
 
             indice_actual += 10
            
@@ -199,7 +195,6 @@ class Museo:
                     break
             else:
                 print("\n no hay mas obras")
-
 
 
 
