@@ -1,8 +1,14 @@
 class Department:
-    def __init__ (self, id, name):
+    """
+    Clase que representa un departamento dentro del museo con atributos de id y nombre
+    """
+    def __init__(self, id, nombre):
         self.id = id
-        self.name = name
+        self.nombre = nombre
 
-    def show (self):
-        print (f"Id: {self.id}")
-        print (f"Name: {self.name}")
+    def show(self):
+        """
+        muestra en la consola los atributos especificados
+        """
+        print(f"ID: {self.id}")
+        print(f"Nombre: {self.nombre}")
