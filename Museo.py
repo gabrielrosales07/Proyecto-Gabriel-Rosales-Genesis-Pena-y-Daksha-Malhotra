@@ -40,3 +40,26 @@ class Museo:
             else:
                 print("Opcion invalida. Por favor seleccione un numero del 1 al 3.")
 
+    def menu_busqueda(self):
+        """
+        muestra el submenu de opciones por departamento, nacionalidad, artista
+        """
+      
+        while True:
+            opcion = input("1. Por departamento \n2. Por Nacionalidad del Autor \n3. Por Nombre del Autor \n4. Volver \n---> ")
+            
+            if opcion == "1":
+                self.buscar_obras_por_departamento()
+
+            elif opcion == "2":
+                self.buscar_obras_por_nacionalidad()
+
+            elif opcion == "3":
+                self.buscar_obras_por_artista()
+
+            elif opcion == "4":
+                break 
+            
+            else:
+                print("Opción invalida. intentalo de nuevo.")
+
