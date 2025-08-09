@@ -1,106 +1,42 @@
-from api import department_api, objects_in_departments, objects_details, nationalities_api, objects_in_nationalities
+"""
+este modulo contiene la clase principal Museo, maneja el menú, la interacción con el usuario, la carga de datos
+y la visualización de obras
+"""
+import os
+import requests
+from PIL import Image
+
+from api import obtener_departamentos, buscar_por_departamento, obtener_detalles_obra, buscar_por_nacionalidad, buscar_por_nombre_artista
 from Department import Department
 from Obra import Obra
 
 class Museo:
-  
-  def start(self):
-    self.iniciar_objetos()
-    
-    while True:
-      interfaz = input ("""Bienvenido al Museo MetroArt, escoja una opcion: 
-1- Buscar Obras
-2- Ver Detalles de Obras
----> """)
-      if interfaz == "1":
-        self.show_obras()
+    """
+    clase principal que gestiona la aplicación
+    """
+    def start(self):
+        """
+        inicia el programa y llama los metodos para cargar los datos y muestra el menu principal
+        """
+        self.cargar_datos()
+       
+        while True:
+            """
+            menu principal que muestra las opciones al usuario
+            """
+            print("\n Bienvenido al museo MetroArt, Elija una opcion")
+            interfaz = input("1.- Ver obras \n2.- Mostrar detalles de la obra \n3.- Salir \n---> ")
 
-  def show_obras (self):
-    choice = input ("""Ingrese como desea ver las obras: 
-1- Por Departamento
-2- Por Nacionalidad del Autor
-3- Por Nombre del Autor
----> """)
-    
-    if choice == "1":
-      self.show_departments()
-      id_departamento = input ("Ingrese el ID de un departamento: ")
-      
-      try:
-        department_found = False
-        for departamento in self.department:
-          if departamento.id == int(id_departamento):
-            department_found = True
-            break
-            
-        if department_found:
-          object_ids = objects_in_departments ()
-          if len(object_ids) > 0:
-            print("Obras encontradas con éxito")
-            print(f"Se encontraron {len(object_ids)} obras ")
-              
-            self.obras = []
-            for object_id in object_ids [:10]:
-              dic_obras = objects_details (object_id)
-              if dic_obras:
-                self.obras.append(Obra( id_obra = dic_obras.get ("objectID"), titulo = dic_obras.get ("title"), autor = dic_obras.get ("artistDisplayName"), nacionalidad = dic_obras.get ("artistNationality"), fecha = dic_obras.get ("objectDate")))
+            if interfaz == "1":
+                self.menu_busqueda()
 
-            for obra in self.obras:
-              obra.show()
+            elif interfaz == "2":
+                self.mostrar_detalles_obra()
 
-          else:
-              print ("No se encontraron obras en este departamento")
-          
-        else:
-            print ("Error: ID ingresado incorrecto")
-            
-      except:
-        print ("Error: El ID del departamento debe ser un número")
+            elif interfaz == "3":
+                print("Saliendo del sistemaa")
+                break
 
-    elif choice == "2":
-      nationalities = nationalities_api()
-      print ("Lista de Nacionalidades")
-      print ()
-      
-      for nationality in nationalities:
-        print (nationality)
-        
-      nationality_found = False
-      nationality_choice = input ("Ingrese la nacionalidad del autor: ")
-      for nationality in nationalities:
-        if nationality_choice.strip().lower() == nationality.strip().lower():
-          nationality_found = True
-          break
-            
-      if nationality_found:
-        object_ids = objects_in_nationalities (nationality)
-        if len (object_ids) > 0:
-          print("Obras encontradas con éxito")
-          print(f"Se encontraron {len(object_ids)} obras")
+            else:
+                print("Opcion invalida. Por favor seleccione un numero del 1 al 3.")
 
-          self.obras = []
-          for object_id in object_ids [:10]:
-            dic_obras = objects_details (object_id)
-            if dic_obras:
-              self.obras.append(Obra( id_obra = dic_obras.get ("objectID"), titulo = dic_obras.get ("title"), autor = dic_obras.get ("artistDisplayName"), nacionalidad = dic_obras.get ("artistNationality"), fecha = dic_obras.get ("objectDate")))
-                            
-          for obra in self.obras:
-            obra.show()
-                
-        else:
-          print ("No se encontraron obras en esta nacionalidad")
-      else:
-        print ("Error: Nacionalidad incorrecta")
-
-  def show_departments (self):
-    for department in self.department:
-      print()
-      department.show()
-
-  def iniciar_objetos (self):   
-    dic_departments = department_api() ["departments"]
-    self.department = []
-    
-    for department in dic_departments:
-      self.department.append (Department(department["departmentId"], department["displayName"]))
-    
