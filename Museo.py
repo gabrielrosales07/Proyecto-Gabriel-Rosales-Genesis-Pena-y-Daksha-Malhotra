@@ -109,7 +109,7 @@ class Museo:
             else:
                 print("Opcion no valida, elija un número de la lista")
         except:
-            print("opcion invalida, ingrese un numero)
+            print("opcion invalida, ingrese un numero")
 
     def leer_nacionalidades_desde_archivo(self):
         """
