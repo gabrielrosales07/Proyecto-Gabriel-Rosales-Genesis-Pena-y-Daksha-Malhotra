@@ -63,7 +63,7 @@ class Museo:
             else:
                 print("Opción invalida. intentalo de nuevo.")
 
-def buscar_obras_por_departamento(self):
+    def buscar_obras_por_departamento(self):
         """
         Permite al usuario buscar obras por ID de departamento
         Muestra los departamentos disponibles y luego pide un ID para buscar obras
@@ -80,8 +80,6 @@ def buscar_obras_por_departamento(self):
             if not ids_obras:
                 print("No se encontraron obras para este departamento.")
                 return
-
-
             self.mostrar_obras_paginadas(ids_obras)
            
         except:
