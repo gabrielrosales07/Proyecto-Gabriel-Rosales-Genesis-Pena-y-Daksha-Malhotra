@@ -112,4 +112,45 @@ class Museo:
             print("opcion invalida, ingrese un numero)
 
 
+    def leer_nacionalidades_desde_archivo(self):
+        """
+        Lee la lista de nacionalidades desde el archivo "Nationalities.txt"
+        """
+        
+        nacionalidades_cargadas = []
+
+        #se tuvo que buscar una manera que no conocemos para leer un archivo txt, importamos os
+        directorio_actual = os.path.dirname(os.path.abspath(__file__))
+        file = os.path.join(directorio_actual, "Nationalities.txt")
+
+        try:
+            with open(file, "r") as archivo:
+                for linea in archivo:
+                    nacionalidades_cargadas.append(linea.strip())
+        except:
+            print(f" no se encontro archivo: {file}")
+        
+        return nacionalidades_cargadas
+
+
+    def buscar_obras_por_artista(self):
+        """
+        Permite al usuario buscar obras por el nombre del artista
+        Utiliza mostrar_obras_paginadas para mostrar los resultados de 10 en 10
+        """
+        
+        nombre_artista = input("\n Ingrese el nombre del artista: ").strip()
+
+        if nombre_artista:
+            ids_obras = buscar_por_nombre_artista(nombre_artista)
+            
+            if ids_obras:
+                self.mostrar_obras_paginadas(ids_obras)
+            else:
+                print(f"No se encontraron obras para el artista {nombre_artista}")
+        
+        else:
+            print("error, no ingresaste nada.")
+
+
 
