@@ -85,4 +85,31 @@ class Museo:
         except:
             print("opcion invalida")
 
+    def buscar_obras_por_nacionalidad(self):
+        """
+        Permite al usuario buscar obras por nacionalidad del autor
+        Muestra las nacionalidades disponibles y luego pide un numero para buscar obras por la nacionalidad
+        Utiliza mostrar_obras_paginadas para mostrar los resultados de 10 en 10
+        """
+        for i, nacionalidad in enumerate(self.nacionalidades):
+            print(f"{i+1}. {nacionalidad}")
+            
+        try:
+            opcion = int(input("\n Seleccione el numero de una nacionalidad: "))
+
+            if opcion >= 1 and opcion <= len(self.nacionalidades):
+                nacionalidad_elegida = self.nacionalidades[opcion - 1]
+               
+                ids_obras = buscar_por_nacionalidad(nacionalidad_elegida)
+               
+                if ids_obras:
+                    self.mostrar_obras_paginadas(ids_obras)
+                else:
+                    print(f"No se encontraron obras en {nacionalidad_elegida} ")
+            else:
+                print("Opcion no valida, elija un número de la lista")
+        except:
+            print("opcion invalida, ingrese un numero)
+
+
 
