@@ -78,6 +78,28 @@ def buscar_por_nacionalidad(nacionalidad):
     except:
         print("Error, no se encontro nada")
         return []
+
+def buscar_por_nombre_artista(nombre_artista):
+    """
+    Busca obras por el nombre del artista en la API (nombre_artista), retorna una lista de
+    IDs que coinciden con el nombre del artista
+    """
+   
+    try:
+        url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?q={nombre_artista}"
+        artista = requests.get(url)
+
+
+        if artista.status_code == 200:
+            return artista.json().get("objectIDs", [])
+        else:
+            print(f"Error al buscar obras por nombre de artista '{nombre_artista}'. Código: {artista.status_code}")
+            return []
+   
+    except:
+        print("Error, no se encontro nada")
+        return []
+
         
 
 
