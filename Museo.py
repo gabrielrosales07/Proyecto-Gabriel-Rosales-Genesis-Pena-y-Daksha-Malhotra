@@ -152,5 +152,54 @@ class Museo:
         else:
             print("error, no ingresaste nada.")
 
+        def mostrar_obras_paginadas(self, ids_obras):
+        """
+        Muestra una lista de obras de 10 en 10.
+        Para cada obra muestra: ID, Título, Autor
+        """
+     
+        total_obras = len(ids_obras)
+       
+        if total_obras == 0:
+            return
+
+
+        indice_actual = 0
+        while indice_actual < total_obras:
+            print(f"\n Imprimiendo de 10 en 10 ")
+           
+            """
+            Se tiene un parametro inicial (indice_actual) que permite iterar en un rango de 10 en 10
+            siempre y cuandoel indice actual no sea mayor que el total de obras
+            """
+            for i in range(indice_actual, min(indice_actual + 10, total_obras)):
+                id_obra_actual = ids_obras[i]
+                try:
+                    datos_obra = obtener_detalles_obra(id_obra_actual)
+                    if datos_obra:
+                        obra_objeto = Obra(datos_obra)
+                        print(f"ID: {obra_objeto.id_objeto} - Título: {obra_objeto.titulo} - Autor: {obra_objeto.nombre_artista}")
+                    else:
+                        print(f"ID no dispomible")
+
+
+                except:
+                    print(f"Error al procesar ")
+
+
+            indice_actual += 10
+           
+            """
+            Se le pide al usuario si quiere continuar viendo mas obras, si coloca "s" imprime las siguientes 10
+            sino rompe el bucle
+            """
+            if indice_actual < total_obras:
+                continuar = input("\n quiere ver más obras? (s/n): ").strip().lower()
+                if continuar != 's':
+                    break
+            else:
+                print("\n no hay mas obras")
+
+
 
 
